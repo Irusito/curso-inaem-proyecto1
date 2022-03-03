@@ -1,3 +1,5 @@
+nombre: Rubén Pérez 
+
 # curso-inaem-proyecto1
 Pig game
 
