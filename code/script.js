@@ -2,17 +2,17 @@
 // numero aleatorio
 
 let n;
-
 function randomN() {
   n = Math.trunc(Math.random() * 6 + 1);
 }
 
 // defino mis elementos del DOM mediante vairables js
 
-let score0 = 0;
-let score1 = 0;
-let totalScore0 = 0;
-let totalScore1 = 0;
+const INIT_SCORE = 0;
+let score0 = INIT_SCORE;
+let score1 = INIT_SCORE;
+let totalScore0 = INIT_SCORE;
+let totalScore1 = INIT_SCORE;
 
 let player = 0;
 
@@ -36,10 +36,9 @@ totalScore1Field.textContent = totalScore1;
 
 // reset
 
-resetBtn.addEventListener('click', initApp);
+resetBtn.addEventListener('click', resetApp);
 
-function initApp() {
-  const INIT_SCORE = 0;
+function resetApp() {
   totalScore0 = INIT_SCORE;
   totalScore1 = INIT_SCORE;
   score0 = INIT_SCORE;
@@ -57,6 +56,7 @@ function initApp() {
   holdBtn.disabled = false;
   rollBtn.style.opacity = '1';
   holdBtn.style.opacity = '1';
+  player = 0;
 }
 
 // roll
