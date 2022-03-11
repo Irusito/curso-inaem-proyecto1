@@ -1,5 +1,4 @@
 'use strict';
-
 // numero aleatorio
 
 let n;
@@ -15,8 +14,7 @@ let score1 = 0;
 let totalScore0 = 0;
 let totalScore1 = 0;
 
-let player0 = true;
-let player1 = false;
+let player = 0;
 
 const score0Field = document.getElementById('current--0');
 const totalScore0Field = document.getElementById('score--0');
@@ -50,7 +48,15 @@ function initApp() {
   totalScore1Field.textContent = totalScore1;
   score0Field.textContent = score0;
   score1Field.textContent = score1;
+  player0Background.classList.remove('player--winner');
+  player1Background.classList.remove('player--winner');
+  player0Background.classList.add('player--active');
+  player1Background.classList.remove('player--active');
   randomN();
+  rollBtn.disabled = false;
+  holdBtn.disabled = false;
+  rollBtn.style.opacity = '1';
+  holdBtn.style.opacity = '1';
 }
 
 // roll
@@ -67,24 +73,22 @@ function rollDice() {
 
   dice.src = imageDice;
 
+  // si sale 1
   if (n === 1) {
-    if (player0 === true) {
+    if (player === 0) {
       score0 = 0;
       score0Field.textContent = score0;
-      player1 = true;
-      player0 = false;
-      player0Background.classList.remove('player--active');
-      player1Background.classList.add('player--active');
+      player = 1;
+      changeBackground();
     } else {
       score1 = 0;
       score1Field.textContent = score1;
-      player0 = true;
-      player1 = false;
-      player0Background.classList.add('player--active');
-      player1Background.classList.remove('player--active');
+      player = 0;
+      changeBackground();
     }
-  } else {
-    if (player0 === true) {
+  } // si no sale 1
+  else {
+    if (player === 0) {
       score0 += n;
       score0Field.textContent = score0;
     } else {
@@ -92,11 +96,6 @@ function rollDice() {
       score1Field.textContent = score1;
     }
   }
-
-  console.log(n);
-  console.log(score0);
-  console.log(player0);
-  console.log(player1);
 }
 
 // hold
@@ -104,35 +103,43 @@ function rollDice() {
 holdBtn.addEventListener('click', holdScore);
 
 function holdScore() {
-  if (player0 === true) {
+  if (player === 0) {
     totalScore0 += score0;
     totalScore0Field.textContent = totalScore0;
     score0 = 0;
+    score0Field.textContent = score0;
 
     if (totalScore0 >= 100) {
       player0Background.classList.add('player--winner');
-      //    se desactiva el botón de roll dice
+      hideBtns();
     }
 
-    player1 = true;
-    player0 = false;
-    player0Background.classList.remove('player--active');
-    player1Background.classList.add('player--active');
+    player = 1;
+    changeBackground();
   } else {
     totalScore1 += score1;
     totalScore1Field.textContent = totalScore1;
     score1 = 0;
+    score1Field.textContent = score1;
 
     if (totalScore1 >= 100) {
       player1Background.classList.add('player--winner');
-      //    se desactiva el botón de roll dice
+      hideBtns();
     }
-    player0 = true;
-    player1 = false;
-    player0Background.classList.add('player--active');
-    player1Background.classList.remove('player--active');
+    player = 0;
+    changeBackground();
   }
+  console.log(player);
+}
 
-  console.log(player0);
-  console.log(player1);
+function hideBtns() {
+  rollBtn.disabled = true;
+  holdBtn.disabled = true;
+  rollBtn.style.opacity = '0.5';
+  holdBtn.style.opacity = '0.5';
+}
+
+function changeBackground() {
+  player0Background.classList.toggle('player--active');
+  player1Background.classList.toggle('player--active');
 }
