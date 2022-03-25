@@ -68,7 +68,6 @@ function rollDice() {
   randomN();
 
   // imagen aleatoria
-
   const imageDice = `dice-${n}.png`;
 
   dice.src = imageDice;
@@ -79,12 +78,10 @@ function rollDice() {
       score0 = 0;
       score0Field.textContent = score0;
       switchPlayer();
-      changeBackground();
     } else {
       score1 = 0;
       score1Field.textContent = score1;
       switchPlayer();
-      changeBackground();
     }
   } // si no sale 1
   else {
@@ -99,7 +96,6 @@ function rollDice() {
 }
 
 // hold
-
 holdBtn.addEventListener('click', holdScore);
 
 function holdScore() {
@@ -115,7 +111,6 @@ function holdScore() {
     }
 
     switchPlayer();
-    changeBackground();
   } else {
     totalScore1 += score1;
     totalScore1Field.textContent = totalScore1;
@@ -127,7 +122,6 @@ function holdScore() {
       hideBtns();
     }
     switchPlayer();
-    changeBackground();
   }
   console.log(player);
 }
@@ -147,4 +141,5 @@ function changeBackground() {
 // si es true significa que player es = 1, y pasará a 0, si es false (player=0) pasará a 1; (Jugar con 0/1 false/true)
 function switchPlayer() {
   player = player ? 0 : 1;
+  changeBackground();
 }
