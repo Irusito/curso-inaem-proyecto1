@@ -77,12 +77,11 @@ function rollDice() {
     if (player === 0) {
       score0 = 0;
       score0Field.textContent = score0;
-      switchPlayer();
     } else {
       score1 = 0;
       score1Field.textContent = score1;
-      switchPlayer();
     }
+    switchPlayer();
   } // si no sale 1
   else {
     if (player === 0) {
@@ -109,8 +108,6 @@ function holdScore() {
       player0Background.classList.add('player--winner');
       hideBtns();
     }
-
-    switchPlayer();
   } else {
     totalScore1 += score1;
     totalScore1Field.textContent = totalScore1;
@@ -121,9 +118,8 @@ function holdScore() {
       player1Background.classList.add('player--winner');
       hideBtns();
     }
-    switchPlayer();
   }
-  console.log(player);
+  switchPlayer();
 }
 
 function hideBtns() {
