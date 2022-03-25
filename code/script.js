@@ -78,12 +78,12 @@ function rollDice() {
     if (player === 0) {
       score0 = 0;
       score0Field.textContent = score0;
-      player = 1;
+      switchPlayer();
       changeBackground();
     } else {
       score1 = 0;
       score1Field.textContent = score1;
-      player = 0;
+      switchPlayer();
       changeBackground();
     }
   } // si no sale 1
@@ -114,7 +114,7 @@ function holdScore() {
       hideBtns();
     }
 
-    player = 1;
+    switchPlayer();
     changeBackground();
   } else {
     totalScore1 += score1;
@@ -126,7 +126,7 @@ function holdScore() {
       player1Background.classList.add('player--winner');
       hideBtns();
     }
-    player = 0;
+    switchPlayer();
     changeBackground();
   }
   console.log(player);
@@ -142,4 +142,9 @@ function hideBtns() {
 function changeBackground() {
   player0Background.classList.toggle('player--active');
   player1Background.classList.toggle('player--active');
+}
+
+// si es true significa que player es = 1, y pasará a 0, si es false (player=0) pasará a 1; (Jugar con 0/1 false/true)
+function switchPlayer() {
+  player = player ? 0 : 1;
 }
